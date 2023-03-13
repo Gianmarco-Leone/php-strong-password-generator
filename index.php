@@ -6,10 +6,32 @@ include_once(__DIR__ . "./_partials/functions.php");
 // Creo variabile che corrisponde al valore passato dall'utente, se esiste, altrimenti la setto vuota
 $strg_length = $_GET["password-length"] ?? "";
 
-// Se ho ricevuto i dati
+// Bonus 2:
+$filter_numbers = $_GET["numbers"] ?? "";
+$filter_letters = $_GET["letters"] ?? "";
+$filter_symbols = $_GET["symbols"] ?? "";
+
+$characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,;:!$%&?";
+
+// Se ho ricevuto i dati, controllando le varie casistiche per il bonus 2
 if(!empty($_GET)) {
+    if($filter_letters === "on" && $filter_numbers === "on" && $filter_symbols === "on") {
+        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,;:!$%&?";
+    } else if ($filter_letters === "on" && $filter_numbers === "on") {
+        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    } else if($filter_letters === "on" && $filter_symbols === "on") {
+        $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,;:!$%&?";
+    } else if ($filter_numbers === "on" && $filter_symbols === "on") {
+        $characters = "0123456789.,;:!$%&?";
+    } else if ($filter_letters === "on") {
+        $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    } else if ($filter_numbers === "on") {
+        $characters = "0123456789";
+    } else if($filter_symbols === "on") {
+        $characters = ".,;:!$%&?";
+    }
     // Salvo in una variabile il risultato della funzione
-    $is_password_generate = generateRandomPassword($strg_length);
+    $is_password_generate = generateRandomPassword($strg_length, $characters);
 
     // Se la password è stat generata
     if($is_password_generate) {
@@ -54,7 +76,29 @@ if(!empty($_GET)) {
                         <input type="number" class="form-control" name="password-length" id="password-length"
                             aria-describedby="basic-addon3" min="0" value="<?=$strg_length?>">
                     </div>
-                    <button class="btn btn-primary">Genera</button>
+                    <p class="mt-2">Con quali caratteri vuoi comporla:</p>
+                    <div class="form-check ms-2">
+                        <input class="form-check-input" type="checkbox" name="numbers" value="on"
+                            id="password-filter-0">
+                        <label class="form-check-label" for="password-filter-0">
+                            Numeri
+                        </label>
+                    </div>
+                    <div class="form-check ms-2">
+                        <input class="form-check-input" type="checkbox" name="letters" value="on"
+                            id="password-filter-1">
+                        <label class="form-check-label" for="password-filter-1">
+                            Lettere
+                        </label>
+                    </div>
+                    <div class="form-check ms-2">
+                        <input class="form-check-input" type="checkbox" name="symbols" value="on"
+                            id="password-filter-2">
+                        <label class="form-check-label" for="password-filter-2">
+                            Simboli
+                        </label>
+                    </div>
+                    <button class="btn btn-primary mt-3">Genera</button>
                 </form>
             </div>
         </div>

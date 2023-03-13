@@ -1,9 +1,9 @@
 <?php
 
 // Funzione che a seconda del numero Int passato come parametro genera una password randomica (Strg) con i valori della variabile $characters, in un range compreso tra 0 e il valore massimo che corrisponde al numero Int passato nel parametro.
-function generateRandomPassword($strg_length) {
+function generateRandomPassword($strg_length, $characters) {
     // Definisco caratteri possibili
-    $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,;:!$%&?";
+    // $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,;:!$%&?";
 
     // Setto inizialmente la stringa vuota
     $random_password = "";
