@@ -46,7 +46,7 @@ function generateRandomPassword($strg_length) {
                 <form method="GET" class="mb-3">
                     <div class="input-group my-3">
                         <input type="number" class="form-control" name="password-length" id="password-length"
-                            aria-describedby="basic-addon3" min="0">
+                            aria-describedby="basic-addon3" min="0" value="<?=$strg_length?>">
                     </div>
                     <button class="btn btn-primary">Genera</button>
                 </form>
