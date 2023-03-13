@@ -11,9 +11,9 @@
 
 - Spostare la logica in un file _functions.php_ che includeremo poi nella pagina principale
 
- <!-- ## Milestone 3 (BONUS):
+## Milestone 3 (BONUS):
 
-- Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $\_SESSION recupererà la password da mostrare all'utente. -->
+- Invece di visualizzare la password nella index, effettuare un redirect ad una pagina dedicata che tramite $\_SESSION recupererà la password da mostrare all'utente.
 
 <!-- ## Milestone 4 (BONUS):
 

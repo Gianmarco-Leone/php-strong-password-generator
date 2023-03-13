@@ -1,11 +1,27 @@
 <?php
 
+// Includo file della funzione
 include_once(__DIR__ . "./_partials/functions.php");
 
+// Creo variabile che corrisponde al valore passato dall'utente, se esiste, altrimenti la setto vuota
+$strg_length = $_GET["password-length"] ?? "";
+
+// Se ho ricevuto i dati
 if(!empty($_GET)) {
-    $strg_length = $_GET["password-length"];
-} else {
-    $strg_length = 0;
+    // Salvo in una variabile il risultato della funzione
+    $is_password_generate = generateRandomPassword($strg_length);
+
+    // Se la password è stat generata
+    if($is_password_generate) {
+        // Avvio la sessione
+        session_start();
+
+        // Salvo la password generata nella sessione
+        $_SESSION["result_password"] = $is_password_generate;
+
+        // Reindirizzo ad un'altra pagina
+        header("Location: ./_partials/successful.php");
+    }
 }
 
 ?>
@@ -40,10 +56,6 @@ if(!empty($_GET)) {
                     </div>
                     <button class="btn btn-primary">Genera</button>
                 </form>
-                <div class="result">
-                    <h2>La password generata è:</h2>
-                    <p> <?= generateRandomPassword($strg_length) ?> </p>
-                </div>
             </div>
         </div>
     </div>
